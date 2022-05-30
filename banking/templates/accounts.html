@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  /* background-color: black; */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.center {
+
+    margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+.center1 {
+
+margin: auto;
+width: 50%;
+border: 3px solid green;
+padding: 10px;
+}
+</style>
+</head>
+<body>
+    <h1 class="center1">Welcome to your user page {{firstname}}</h1>
+    <div class="center">
+    <h4>First name: {{firstname}} </h4>
+    <h4>Last name: {{lastname}} </h4>
+    <h4>email: {{email}}</h4>
+    <h4>Address: {{address}} </h4>
+    <h4>Phone number: {{phone}}</h4>
+
+{% for item in newlist %}
+<div class="center1">
+ 
+  <h4>Account ID:  item </h4>
+</div>
+
+</div>
+{% endfor %}
+  </div>
+  <form action="/transactions/" method ="get">
+    <div class ="center1">
+      <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+    <button type="submit" class="registerbtn">Transaction Statement</button>
+
+  </div>
+  </form>
+  {% if not firstname %}
+ 
+  <form action="/accounts/input/" method ="get">
+    <div class ="center1">
+      <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+    <button type="submit" class="registerbtn">Add user profile</button>
+  </div>
+   </form>
+  {% else %}
+   
+  <form action="/accounts/input/" method ="get">
+    <div class ="center1">
+      <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+    <button type="submit" class="registerbtn">Update user profile</button>
+  </div>
+   
+  {% endif %}
+
+
+
+
+  </form>
+<form action="/deposit/start" method="get">
+    <div class ="center1">
+  
+    <button type="submit" class="registerbtn">Deposit</button>
+    <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+  </div>
+  
+</form>
+
+<form action="/withdraw/start" method="get">
+    <div class ="center1">
+      <input type="hidden" placeholder="Enter first name" name={{infoid}} id="infoid" required>
+    <button type="submit" class="registerbtn">Withdraw</button>
+  </div>
+  
+</form>
+
+{% for item in list %}
+<div class="center1">
+ 
+  <h4>Account ID:  {{ item[0]}}    Balance:   {{item[2]}} </h4>
+</div>
+
+</div>
+{% endfor %}
+<form action="/account/create" method="get">
+    <div class ="center">
+  <div class="container">
+    <hr>
+    <button type="submit" class="registerbtn">Create Bank Account</button>
+    </div>
+
+    <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+    
+  </div>
+ </form>
+
+  <form action="/account/delete" method="post">
+    <div class ="center">
+  <div>
+    <hr>
+ 
+    </div>
+
+    <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+    <input type="text" placeholder="Enter Account id" name=account_id id="userid" required>
+    <button type="submit" class="registerbtn">Close Bank Account</button>
+  </div>
+  
+</form>
+
+</body>
+</html>
