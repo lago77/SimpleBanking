@@ -3,6 +3,7 @@ from flask import redirect, url_for
 import re
 from repository.usertransaction_dao import *
 from repository.useraccount_dao import *
+from service.validation import *
 def starting_deposit(req):
 
     print("starting deposit")
@@ -54,9 +55,14 @@ def debit(req,input):
     print(accounts)
     balance=accounts[2]
     print(type(amount))
-    newbalance = balance + int(amount)
+    newbalance=0.0
+    if validate_transfer(amount):
+        newbalance = balance + float(amount)
 
-    insert_transaction(id,account_id, amount, "Credit")
-    update_balance(account_id, newbalance)
+        insert_transaction(id,account_id, amount, "Credit")
+        update_balance(account_id, newbalance)
     
-    return redirect(url_for("account_page",userid=id))
+        return redirect(url_for("account_page",userid=id))
+
+    else:
+        return "You are attempting to overdraft your account or input an invalid entry"

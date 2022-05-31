@@ -53,10 +53,20 @@ def validate_registration(username, password):
 
 def validate_transfer(amount):
     ##this function tests to make sure the balance is not negative or and not a string when entered.
-
+    amount=float(amount)
     amount_conditional_isnum= ((isinstance(amount,float) or isinstance(amount,int)))
+    print("the amount is ", amount, " ", amount_conditional_isnum)
+    # amount_conditional_greaterthanzero =  (amount>=0)
+
+    if amount_conditional_isnum:
+      
+        amount_conditional_greaterthanzero =  (amount>=0)
+        print("in if")
+        print(amount_conditional_greaterthanzero)
+        print(amount_conditional_isnum)
+        return (amount_conditional_greaterthanzero and amount_conditional_greaterthanzero)
+
+    else:
+        return False
+
     
-    amount_conditional_greaterthanzero =  (amount>0)
-
-
-    return (amount_conditional_greaterthanzero and amount_conditional_greaterthanzero)

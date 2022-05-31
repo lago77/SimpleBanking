@@ -84,6 +84,26 @@ def delete_user(username,password):
         if connection is not None:
             connection.close()
 
+def delete_user_by_id(id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    print("we are connecting")
+    
+    qry = "DELETE FROM userlogin WHERE user_id=%s;"
+
+    try:
+        cursor.execute(qry,(id,))
+        # id = cursor.fetchone()[0]
+        connection.commit()
+        print("my id is",str(id))
+        return id
+    except(psycopg2.DatabaseError) as error:
+        print(error)
+        connection.rollback()
+    finally:
+        if connection is not None:
+            connection.close()
+
 def update_password(user_id, newpass):
     connection = get_connection()
     cursor = connection.cursor()

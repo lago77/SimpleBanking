@@ -27,14 +27,17 @@ def transaction_page(input):
     print(input)
     id=input['userid']
         ##get the account id first
-    data1=insert_transaction(3,151, "debit")
-    data=select_accounts_by_id(6)    
+    # data1=insert_transaction(3,151, "debit")
+    # data=select_accounts_by_id(6)    
+    data = select_transactions_by_id(id)
     print("my data")
-    print(data1)
+    print(data)
     for x in data:
         print("data")
         print(x)
-        print(x[0])
+        print(x[2])
+        print(x[3])
+        print(x[4])
        
     mylist=[1,3]
     return render_template("transactions.html", userid=id, list=data)

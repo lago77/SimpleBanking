@@ -8,10 +8,17 @@ def check_user_login(login_input):
     # user_login = check_login(login_input)
     print("my login isss")
     myusername=login_input['username']
-    id =select_user(myusername).user_id
     print("my id is")
-    print(id)
-    print(login_input['username'])
-    email=''
+    loginobj=select_user(myusername)
+    if loginobj != None:
+        print(loginobj)
+        id=loginobj.user_id
+        # id =select_user(myusername).user_id
+        print("my id is")
+        print(id)
+        print(login_input['username'])
+        email=''
 
-    return redirect(url_for("account_page",userid=id))
+        return redirect(url_for("account_page",userid=id))
+    else:
+        return "Invalid Login"

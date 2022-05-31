@@ -110,14 +110,114 @@ def processing_account(input):
 
     return redirect(url_for("account_page",userid=id))
 
-# def profile_form(input):
-#     # user_login = check_login(login_input)
-#     print("my login isss")
-#     myusername=login_input['username']
-#     id =select_user(myusername).user_id
-#     print("my id is")
-#     print(id)
-#     print(login_input['username'])
+def delete_account(input):
+    print("deleted account")
+    print(input)
+    
+    # account_id=input['account_id']
+    # print("account id is ", account_id)
+    # print(input)
+    re_num = re.compile(r'^[0-9]*$')
+    for x in input:
+        print("start")
+        num_conditional = (re_num.search(x)!=None)
+        print(x)
+        if num_conditional:
+            id=int(x)
 
-#     return redirect(url_for("profile",userid=id, username=myusername))
+    
+    print("my arg is")
+    print(id)
+    # delete_accounts_by_id(account_id)
+    return redirect(url_for("delete_accounts"), userid=id)
+    # return redirect(request.referrer)
 
+def account_delete_form(input):
+        print(input['userid'])
+        print("test")
+        id=input['userid']
+        print(id)
+        print("in accountform")
+        print(id)
+
+        return render_template("account_deletion.html", userid=id)
+
+def startform_delete(req):
+      print("in startform the function")
+      print(req)
+      re_num = re.compile(r'^[0-9]*$')
+      id=''
+      print("before for loop")
+      for x in req:
+        print("start")
+        num_conditional = (re_num.search(x)!=None)
+        print(x)
+        if num_conditional:
+            id=int(x)
+
+    #   insert_account(id, balance)
+      print("end startform")
+
+
+      return redirect(url_for("delete_account",userid=id))
+
+def account_form_delete(input):
+        print(input['userid'])
+        print("test")
+        id=input['userid']
+        print(id)
+        print("in accountform")
+        print(id)
+
+        return render_template("account_deletion.html", userid=id)
+
+def deleting_account(input):
+    print("in processing account")
+    print("\\\\\\\\\\\\\\////////////////////////")
+    print(input)
+    print(input['accountid'])
+    accountid=input['accountid']
+    re_num = re.compile(r'^[0-9]*$')
+    id=''
+    print("before for loop")
+    for x in input:
+        print("start")
+        num_conditional = (re_num.search(x)!=None)
+        print(x)
+        if num_conditional:
+            id=int(x)
+
+    get_account=select_accounts_by_account_id(accountid)
+    
+    if get_account ==None:
+        
+        return "That account does not exist"
+
+
+
+    else:
+        print("***************accessed deletion************")
+        delete_accounts_by_id(accountid)
+        print("my get_id is ",get_account)
+        # insert_account(id, balance)
+        print("my id")
+        print(id)
+        return redirect(url_for("account_page",userid=id))
+
+
+def close_account(input):
+    print("in close_account")
+    print(input)
+
+    re_num = re.compile(r'^[0-9]*$')
+    for x in input:
+        print("start")
+        num_conditional = (re_num.search(x)!=None)
+        print(x)
+        if num_conditional:
+            id=int(x)
+    print("my id ")
+    print(id)
+    newid=str(id)
+    delete_user_by_id(newid)
+    return redirect(url_for("home_page"))

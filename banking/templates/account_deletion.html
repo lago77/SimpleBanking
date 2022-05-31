@@ -5,7 +5,7 @@
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
-  
+  background-color: black;
 }
 
 * {
@@ -73,34 +73,22 @@ a {
   border: 3px solid green;
   padding: 10px;
 }
-.center1 {
-
-margin: auto;
-width: 50%;
-border: 3px solid green;
-padding: 10px;
-}
 </style>
 </head>
 <body>
 
-    
-
-      {% for item in list %}
-      <div class="center1">
-       
-        <h4>Account ID: {{item[2]}}    Amount transacted: {{item[3]}}  Transaction type: {{item[4]}} </h4>
-      </div>
+<form action="/account/deletion" method="post">
+    <div class ="center">
+  <div class="container">
+    <hr>
+    <label for="accountid"><b>Enter Account ID to be deleted</b></label>
+    <input type="account" placeholder="Enter account ID" name="accountid" id="accountid" required>
+    <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+    </div>
+    <button type="submit" class="registerbtn">Submit</button>
+  </div>
   
-      </div>
-      {% endfor %}
-
-
-
-
-  
-
-
+</form>
 
 </body>
 </html>

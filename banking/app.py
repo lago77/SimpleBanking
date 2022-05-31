@@ -151,10 +151,10 @@ def processing_transactions():
     
     return transaction_page(request.args)
 
-@app.route('/update/start', methods=["POST", "GET"])   
-def start_update():
+# @app.route('/update/start', methods=["POST", "GET"])   
+# def start_update():
     
-    return update_start(request.args)
+#     return update_start(request.args)
 
 @app.route('/update/user', methods=["GET"])   
 def update_user():
@@ -162,6 +162,44 @@ def update_user():
     print(request)
     return update_user_info(request)
 
+@app.route('/close', methods=["GET"])   
+def closing_account():
+    print("closing account")
+    print(request.args)
+    return close_account(request.args)
+
+
+# @app.route('/account/delete', methods=["GET"])   
+# def deleting_account():
+#     print("closing account")
+#     print(request.args)
+#     return delete_account(request.args)
+
+# @app.route('/account/delete', methods=["GET"])   
+# def delete_accounts():
+#     print("closing account")
+#     print(request.args)
+#     return account_delete_form(request.args)
+
+@app.route('/account/delete', methods=["GET"])
+def starting_form_delete():
+    print("in starting_from")
+    # print(request.query_string)
+    print(request.args)
+    return startform_delete(request.args)
+
+@app.route('/account/form/delete', methods=["GET"])
+def delete_account():
+    print("account form")
+    print(request.args)
+    return account_form_delete(request.args)
+
+@app.route('/account/deletion', methods=["POST"])
+def processing_account_deletion():
+    print("in account/creation")
+    # print(request.query_string)
+    print(request.form)
+    return deleting_account(request.form)
 
 if __name__ == "__main__":
     app.run(debug=True)

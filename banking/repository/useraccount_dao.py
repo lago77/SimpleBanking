@@ -9,7 +9,7 @@ def select_accounts_by_id(userid):
     connection = get_connection()
     cursor = connection.cursor()
 
-    qry = f"SELECT * FROM useraccount WHERE user_id = {userid};"
+    qry = f"SELECT * FROM useraccounts WHERE user_id = {userid};"
 
     try:
         cursor.execute(qry)
@@ -35,7 +35,7 @@ def select_accounts_by_account_id(accountid):
     connection = get_connection()
     cursor = connection.cursor()
 
-    qry = f"SELECT * FROM useraccount WHERE account_id = {accountid};"
+    qry = f"SELECT * FROM useraccounts WHERE account_id = {accountid};"
 
     try:
         cursor.execute(qry)
@@ -58,7 +58,7 @@ def insert_account(userid, balance):
     connection = get_connection()
     cursor = connection.cursor()
 
-    qry = "INSERT INTO useraccount VALUES (default, %s, %s) RETURNING account_id;"
+    qry = "INSERT INTO useraccounts VALUES (default, %s, %s) RETURNING account_id;"
 
     try:
         cursor.execute(qry, (userid, balance))
@@ -77,7 +77,7 @@ def update_balance(account_id, newbalance):
     cursor = connection.cursor()
 
    
-    qry = "UPDATE useraccount SET balance=%s where account_id=%s RETURNING account_id"
+    qry = "UPDATE useraccounts SET balance=%s where account_id=%s RETURNING account_id;"
 
     try:
         cursor.execute(qry, (newbalance, account_id))
@@ -87,6 +87,38 @@ def update_balance(account_id, newbalance):
     except(psycopg2.DatabaseError) as error:
         print(error)
         connection.rollback()
+    finally:
+        if connection is not None:
+            connection.close()
+
+def delete_accounts_by_id(accountid):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    qry = "DELETE FROM useraccounts WHERE account_id = %s;"
+    print("query")
+    print(qry)
+    try:
+        print("////////executing query")
+        cursor.execute(qry,( accountid))
+        print("////query executed")
+        connection.commit()
+    
+        # while True:
+        #     record = cursor.fetchall()
+        #     print("my records")
+        #     print(record)
+        #     connection.commit()
+        #     if record is None:
+        #         break
+           
+        #     # user_accounts = Account(record[0], record[1], record[2])
+        #     print(record)
+        #     print("end")
+        #     return record
+        return "deleted"
+    except(psycopg2.DatabaseError) as error:
+        print(error)
     finally:
         if connection is not None:
             connection.close()

@@ -80,10 +80,41 @@ width: 50%;
 border: 3px solid green;
 padding: 10px;
 }
+
+.center2{
+
+  margin: auto;
+width: 50%;
+border: 3px solid green;
+padding: 10px;
+display:flex;
+flex-direction: row;
+}
 </style>
 </head>
 <body>
-    <h1 class="center1">Welcome to your user page {{firstname}}</h1>
+    <div class="center2"><div><h1>Welcome to your user page {{firstname}}</h1></div>
+    
+    
+    <div class="center1">  
+      <form action="/" method ="get">
+    
+        <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+      <button type="submit" class="registerbtn">Logout</button>
+        </form>
+    </div> 
+    <div class="center1">  
+      <form action="/close" method ="get">
+    
+        <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
+      <button type="submit" class="registerbtn">Close Account</button>
+        </form>
+    </div> 
+  
+  
+  
+  
+  </div>
     <div class="center">
     <h4>First name: {{firstname}} </h4>
     <h4>Last name: {{lastname}} </h4>
@@ -166,7 +197,7 @@ padding: 10px;
   </div>
  </form>
 
-  <form action="/account/delete" method="post">
+  <form action="/account/delete" method="get">
     <div class ="center">
   <div>
     <hr>
@@ -174,7 +205,7 @@ padding: 10px;
     </div>
 
     <input type="hidden" placeholder="Enter first name" name={{userid}} id="userid" required>
-    <input type="text" placeholder="Enter Account id" name=account_id id="userid" required>
+    <!-- <input type="text" placeholder="Enter Account id" name=account_id id="userid" required> -->
     <button type="submit" class="registerbtn">Close Bank Account</button>
   </div>
   
