@@ -16,3 +16,4 @@ AWS RDS
 
 Database ERD
 ---------------
+![image info](./databaseschema.png)
