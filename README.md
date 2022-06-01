@@ -14,6 +14,7 @@ HTML/CSS
 Flask
 AWS RDS
 PYTEST
+POSTMAN
 
 Database ERD
 ---------------
