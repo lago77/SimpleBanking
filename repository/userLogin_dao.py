@@ -36,9 +36,10 @@ def select_user(username):
         while True:
             record = cursor.fetchone()
             if record is None:
-                break
-            user_login = Login(record[0], record[1], record[2])
-            return user_login
+                return None
+            else:
+                user_login = Login(record[0], record[1], record[2])
+                return user_login
     except(psycopg2.DatabaseError) as error:
         print(error)
     finally:

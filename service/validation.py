@@ -1,5 +1,5 @@
 import re
-
+from repository.userLogin_dao import *
 def validate_balance(balance):
     ##this function tests to make sure the balance is not negative or and not a string when entered.
 
@@ -44,29 +44,58 @@ def validate_registration(username, password):
      
     # Pass the string in search
     # method of regex object.   
-    #checks to make sure the password contains atleast one alphanumeric character and is greater than six characters
+    #checks to make sure the password contains atleast one special character and is greater than six characters
     password_conditional = (regex.search(password) != None) and (len(password)>6)  and ( " " not in password)
-    #check to make sure the username does not contain alphanumeric characters and is greater than or equal to five characters
+    #check to make sure the username does not contain special characters and is greater than or equal to five characters
     username_conditional = (regex.search(username) == None) and (len(username)>=5) and ( " " not in username)
 
-    return (username_conditional and password_conditional)
+    user = select_user(username)
+    print("my user")
+    print(user)
+    if user == None:
+        username_unique = True
+    else:
+        username_unique = False
+
+    return (username_conditional and password_conditional and username_unique)
 
 def validate_transfer(amount):
     ##this function tests to make sure the balance is not negative or and not a string when entered.
-    amount=float(amount)
-    amount_conditional_isnum= ((isinstance(amount,float) or isinstance(amount,int)))
-    print("the amount is ", amount, " ", amount_conditional_isnum)
-    # amount_conditional_greaterthanzero =  (amount>=0)
 
-    if amount_conditional_isnum:
+    try:
+
+        amount=float(amount)
+            
+        amount_conditional_isnum= ((isinstance(amount,float) or isinstance(amount,int)))
+        print("the amount is ", amount, " ", amount_conditional_isnum)
+        # amount_conditional_greaterthanzero =  (amount>=0)
+
+        if amount_conditional_isnum:
       
-        amount_conditional_greaterthanzero =  (amount>=0)
-        print("in if")
-        print(amount_conditional_greaterthanzero)
-        print(amount_conditional_isnum)
-        return (amount_conditional_greaterthanzero and amount_conditional_greaterthanzero)
+            amount_conditional_greaterthanzero =  (amount>=0)
+    
+            return (amount_conditional_greaterthanzero and amount_conditional_greaterthanzero)
 
-    else:
+        else:
+            return False
+
+        
+    except(Exception) as e:
+        print("error ", e)
         return False
+
+    
+    # amount_conditional_isnum= ((isinstance(amount,float) or isinstance(amount,int)))
+    # print("the amount is ", amount, " ", amount_conditional_isnum)
+    # # amount_conditional_greaterthanzero =  (amount>=0)
+
+    # if amount_conditional_isnum:
+      
+    #     amount_conditional_greaterthanzero =  (amount>=0)
+    
+    #     return (amount_conditional_greaterthanzero and amount_conditional_greaterthanzero)
+
+    # else:
+    #     return False
 
     

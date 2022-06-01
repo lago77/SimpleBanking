@@ -94,13 +94,15 @@ def update_balance(account_id, newbalance):
 def delete_accounts_by_id(accountid):
     connection = get_connection()
     cursor = connection.cursor()
-
+    print(type(accountid))
     qry = "DELETE FROM useraccounts WHERE account_id = %s;"
+
     print("query")
     print(qry)
+    print(accountid)
     try:
         print("////////executing query")
-        cursor.execute(qry,( accountid))
+        cursor.execute(qry,(accountid,))
         print("////query executed")
         connection.commit()
     

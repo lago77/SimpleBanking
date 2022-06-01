@@ -50,18 +50,19 @@ def credit(req,input):
     print(input['amount'])
     amount=input['amount']
     accounts=select_accounts_by_account_id(account_id)
+
     print("******************************")
     print("my accounts")
     print(accounts)
     balance=accounts[2]
     print(type(amount))
-    newbalance = balance - float(amount)
-    validate_transfer(newbalance)
-    if validate_transfer(newbalance):
-
+    newbalance=0.0
+    
+    if validate_transfer(amount):
+        newbalance = balance - float(amount)
         insert_transaction(id,account_id, amount, "Debit")
         update_balance(account_id, newbalance)
         return redirect(url_for("account_page",userid=id))
 
     else:
-        return "You are attempting to overdraft your account"
+        return "You are attempting to overdraft your account or input an invalid entry"

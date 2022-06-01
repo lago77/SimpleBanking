@@ -4,6 +4,8 @@ from repository.userLogin_dao import *
 from repository.userInfo_dao import *
 from repository.useraccount_dao import *
 import re
+
+from service.validation import validate_transfer
 def get_account(req):
     print("in get_account")
     print("*******************")
@@ -102,13 +104,16 @@ def processing_account(input):
         print(x)
         if num_conditional:
             id=int(x)
-
-    insert_account(id, balance)
-    print(id)
-
-
-
-    return redirect(url_for("account_page",userid=id))
+    try:
+        testbalance=float(balance)
+        print("test balance is")
+        print(testbalance)
+        if validate_transfer(testbalance):
+            insert_account(id, balance)
+            return redirect(url_for("account_page",userid=id))
+    except(Exception) as e:
+        
+        return "Invalid amount or invalid entry"
 
 def delete_account(input):
     print("deleted account")

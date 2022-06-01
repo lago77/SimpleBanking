@@ -17,4 +17,4 @@ def register_user(register_input):
         if user_id is not None:
             return render_template("login.html")
     else:
-        return "Failed to register, improper username and password"
+        return "Failed to register, improper username and password, or username nonunique"
