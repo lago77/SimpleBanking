@@ -85,16 +85,20 @@ def create_account():
 
 @app.route('/account/creation', methods=["POST"])
 def initializing_account():
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     print("in account/creation")
     # print(request.query_string)
     print(request.form)
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
     return processing_account(request.form)
 
 @app.route('/deposit/start', methods=["GET"])
 def deposit_start():
-    print("-=------------------")
+    
     print("in deposit_start")
     print(request.args)
+    
     return starting_deposit(request.args)
 
 @app.route('/deposit', methods=[ "GET"])
