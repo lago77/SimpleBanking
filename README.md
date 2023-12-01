@@ -6,7 +6,7 @@ The web app I have built is a simple banking app that provides several functiona
 
 The trello story board is here: https://trello.com/b/hXmBWHIc/project-0
 
-Technology stacks are
+Technology stack
 ----------------------
 
 Python3
