@@ -1,4 +1,4 @@
-# Project0
+# SimpleBanking
 
 This is the repository for SimpleBanking; a project utilized  to develop a simple fullstack developed in flask and html utilizing restapi's, aws database connectivity and a testing suite.
 The web app I have built is a simple banking app that provides several functionalities to the user: 1) Register an account with a unique username and password 2) Login with that username 3)Set up a user profile
